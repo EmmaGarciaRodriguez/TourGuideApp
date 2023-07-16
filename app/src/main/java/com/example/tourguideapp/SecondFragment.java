@@ -1,6 +1,7 @@
 package com.example.tourguideapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -73,6 +75,7 @@ public class SecondFragment extends Fragment{
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -87,9 +90,22 @@ public class SecondFragment extends Fragment{
         list = view.findViewById(R.id.IvLista);
 
         // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-
         list.setAdapter(new Adapter(mContext, data, imgData));
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent visorDetails = new Intent(view.getContext(), PlaceDetails.class);
+                visorDetails.putExtra("TIT", data[position][0]);
+                visorDetails.putExtra("DES", data[position][1]);
+                visorDetails.putExtra("IM", imgData[position]);
+                visorDetails.putExtra("RA", data[position][2]);
+
+                startActivity(visorDetails);
+
+            }
+
+        });
         return view;
 
     }

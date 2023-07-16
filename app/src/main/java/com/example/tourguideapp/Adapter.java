@@ -33,10 +33,8 @@ public class Adapter extends BaseAdapter {
         final View view = inflater.inflate(R.layout.listelement, null);
 
         TextView title = (TextView) view.findViewById(R.id.tvTitle);
-        TextView  subtitle = (TextView) view.findViewById(R.id.tvTitle);
-
+        TextView  subtitle = (TextView) view.findViewById(R.id.tvSubtitle);
         ImageView image = (ImageView) view.findViewById(R.id.ivImage);
-
         RatingBar rating = (RatingBar) view.findViewById(R.id.ratingBar);
 
         title.setText(data[i][0]);
@@ -44,16 +42,16 @@ public class Adapter extends BaseAdapter {
         image.setImageResource(imgData[i]);
         rating.setProgress(Integer.valueOf(data[i][2]));
 
-        /*
         image.setTag(i);
+
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent visorImage = new Intent(context, visor.class);
-                visorimage.putExtra("IMG", imgData[(Integer)v.getTag()]);
+                Intent visorImage = new Intent(context, Visor.class);
+                visorImage.putExtra("IMG", imgData[(Integer)v.getTag()]);
                 context.startActivity(visorImage);
             }
-        });*/
+        });
 
         return view;
     }
