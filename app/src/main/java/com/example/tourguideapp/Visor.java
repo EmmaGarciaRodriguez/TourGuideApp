@@ -18,7 +18,7 @@ public class Visor extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
-        if(b!=null) {
+        if (b!=null) {
             img.setImageResource(b.getInt("IMG"));
         }
     }

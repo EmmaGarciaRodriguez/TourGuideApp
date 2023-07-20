@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -24,9 +25,21 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        tName = findViewById(R.id.name);
+        //tName = findViewById(R.id.name);
         String name = getIntent().getStringExtra("name");
-        tName.setText(name);
+        String password = getIntent().getStringExtra("password");
+        String userId = getIntent().getStringExtra("userId");
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name); // Agrega los datos que deseas pasar al Fragment
+        bundle.putString("password", password); // Agrega los datos que deseas pasar al Fragment
+        bundle.putString("userId", userId); // Agrega los datos que deseas pasar al Fragment
+
+
+        firstFragment.setArguments(bundle);
+
+
+
+        // Luego, realiza la transacción del Fragment
 
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

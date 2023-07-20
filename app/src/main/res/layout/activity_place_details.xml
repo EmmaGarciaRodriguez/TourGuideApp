@@ -7,24 +7,24 @@
     tools:context=".PlaceDetails">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/eTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Título de la película"
-        app:layout_constraintBottom_toTopOf="@+id/image"
+        android:text="Título del lugar"
+        app:layout_constraintBottom_toTopOf="@+id/eImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/eDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:text="descripcion de la pelicula"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image" />
+        app:layout_constraintTop_toBottomOf="@+id/eImage" />
 
     <Button
         android:id="@+id/button2"
@@ -35,10 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/eRatingBar" />
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/eImage"
         android:layout_width="206dp"
         android:layout_height="233dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,13 +48,13 @@
         tools:ignore="MissingConstraints" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/eRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/eDescription" />
 
     <Button
         android:id="@+id/button3"

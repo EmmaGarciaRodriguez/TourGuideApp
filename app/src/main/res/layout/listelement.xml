@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.555" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/eRatingBar"
         android:layout_width="234dp"
         android:layout_height="47dp"
         android:scrollbarSize="1dp"
@@ -88,5 +88,17 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/realalcazarsevilla" />
+
+    <Button
+        android:id="@+id/hola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="Details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eRatingBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

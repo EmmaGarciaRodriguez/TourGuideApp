@@ -46,14 +46,18 @@ public class Login extends AppCompatActivity {
                                 });
                             }else{
                                 String name = userEntity.name;
-                                startActivity(new Intent(Login.this, HomeScreen.class)
-                                        .putExtra("name", name));
+                                String password = userEntity.password;
+                                String userId = userEntity.userId;
+                                Intent intent = new Intent(Login.this, HomeScreen.class);
+                                intent.putExtra("name", name);
+                                intent.putExtra("password", password);
+                                intent.putExtra("userId", userId);
+                                // Agrega más datos según sea necesario
+                                startActivity(intent);
                             }
                         }
                     }).start();
                 }
-
-
             }
         });
     }

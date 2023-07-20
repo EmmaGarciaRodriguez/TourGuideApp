@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +33,7 @@ public class SecondFragment extends Fragment{
     private String mParam2;
     private Context mContext;
 
+    private DataListener dataListener;
 
     ListView list;
     String[][] data = {
@@ -87,26 +92,28 @@ public class SecondFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_second, container, false);
 
         // Obtiene una referencia al ListView
-        list = view.findViewById(R.id.IvLista);
+        list = (ListView) view.findViewById(R.id.IvLista);
 
         // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-        list.setAdapter(new Adapter(mContext, data, imgData));
+        list.setAdapter(new Adapter(mContext, data, imgData, list));
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent visorDetails = new Intent(view.getContext(), PlaceDetails.class);
-                visorDetails.putExtra("TIT", data[position][0]);
-                visorDetails.putExtra("DES", data[position][1]);
-                visorDetails.putExtra("IM", imgData[position]);
-                visorDetails.putExtra("RA", data[position][2]);
-
-                startActivity(visorDetails);
-
-            }
-
-        });
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (dataListener != null) {
+            dataListener.onDataReceived(data);
+        }
 
     }
+    public interface DataListener {
+        void onDataReceived(String[][] dataList);
+    }
+
+    public void setDataListener(DataListener listener) {
+        this.dataListener = listener;
+    }
+
 }
