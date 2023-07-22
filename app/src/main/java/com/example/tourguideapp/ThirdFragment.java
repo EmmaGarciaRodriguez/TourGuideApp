@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,40 +72,76 @@ public class ThirdFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        recuperateData();
 
-        AppDatabase appDatabase = AppDatabase.getInstance(requireContext()); // O getContext() según el método donde estés
+    }
+
+    private void recuperateData() {
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext()); // O getContext() según el método donde estés
         DataDao dataDao = appDatabase.dataDao();
 
-        int entityId = 1; // Asigna el ID de la entidad que deseas recuperar
-        DataEntity dataEntity = dataDao.getDataById(entityId);
+        Integer entityId = 2; // Asigna el ID de la entidad que deseas recuperar
+        int entId = 1; // El mismo ID que utilizaste al guardar la lista
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Recupera el JSON almacenado en la entidad
+                DataEntity dataEntity = dataDao.getDataById(entityId);
+
+                String jsonData = dataEntity.getDataJson();
+
+                // Convierte el JSON a una lista String[][]
+                Gson gson = new Gson();
+                dataList = gson.fromJson(jsonData, String[][].class);
+                Log.d("TAG", "DATOS LEIDOS CORRECTAMENTE");
+                // Ahora dataList contiene la lista original de String[][]
 
 
-        // Recupera el JSON almacenado en la entidad
-        String jsonData = dataEntity.getDataJson();
 
-        // Convierte el JSON a una lista String[][]
-        Gson gson = new Gson();
-        dataList = gson.fromJson(jsonData, String[][].class);
+                //RECUPERAR LISTA POSICIONES
+                DataEntity favsEntity = dataDao.getDataById(entId);
+                // Recupera el JSON almacenado en la entidad
+                String jsonFavsData = favsEntity.getDataJson();
 
-        // Ahora dataList contiene la lista original de String[][]
+                // Convierte el JSON a una lista de enteros utilizando Gson
+                Gson g = new Gson();
+                Type listType = new TypeToken<List<Integer>>(){}.getType();
+                listaFavs = g.fromJson(jsonFavsData, listType);
+
+                // Ahora listaFavs contiene la lista original de enteros que habías guardado
+
+            }
+        }).start();
 
 
 
         //Recuperar la lista con las posiciones de los elementos favoritos
 
-        int entId = 2; // El mismo ID que utilizaste al guardar la lista
-        DataEntity favsEntity = dataDao.getDataById(entId);
-        // Recupera el JSON almacenado en la entidad
-        String jsonFavsData = favsEntity.getDataJson();
 
-        // Convierte el JSON a una lista de enteros utilizando Gson
-        Gson g = new Gson();
-        Type listType = new TypeToken<List<Integer>>(){}.getType();
-        listaFavs = g.fromJson(jsonFavsData, listType);
 
-        // Ahora listaEnteros contiene la lista original de enteros que habías guardado
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataEntity favsEntity = dataDao.getDataById(entId);
+                // Recupera el JSON almacenado en la entidad
+                String jsonFavsData = favsEntity.getDataJson();
 
+                // Convierte el JSON a una lista de enteros utilizando Gson
+                Gson g = new Gson();
+                Type listType = new TypeToken<List<Integer>>(){}.getType();
+                listaFavs = g.fromJson(jsonFavsData, listType);
+
+                // Ahora listaFavs contiene la lista original de enteros que habías guardado
+
+            }
+        }).start();*/
+
+
+        Log.d("TAG", "Valor de listaFavs: " + listaFavs);
+        Log.d("TAG", "Valor de datos: " + dataList);
     }
+
 
     @Override
     public void onAttach(Context context) {

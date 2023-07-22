@@ -6,18 +6,19 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "data_table")
 public class DataEntity {
+
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    Integer id;
 
     @ColumnInfo(name = "data_json")
-    private String dataJson; // Almacenará la lista String[][] convertida a JSON
+    String dataJson; // Almacenará la lista String[][] convertida a JSON
 
-    // Constructor, getters y setters
 
-    public DataEntity(int id, String dataJson) {
+    public DataEntity(Integer id, String dataJson) {
         this.id = id;
         this.dataJson = dataJson;
     }
+// Constructor, getters y setters
 
     public int getId() {
         return id;

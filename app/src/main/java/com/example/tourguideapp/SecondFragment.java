@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,16 +88,33 @@ public class SecondFragment extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        // Convierte la lista String[][] a JSON utilizando Gson
-        /*Gson gson = new Gson();
+
+        //GUARDAR LA LISTA DE DATA EN LA BD
+
+        // Convierte la lista de DATOS a JSON utilizando Gson
+        Gson gson = new Gson();
         String jsonData = gson.toJson(data);
 
         // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
-        int entityId = 1;
+        int entityId = 2;
         DataEntity dataEntity = new DataEntity(entityId, jsonData);
 
         // Inserta la entidad en la base de datos
-        AppDatabase.getInstance(mContext).dataDao().insertData(dataEntity);*/
+        //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
+
+
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext());
+        DataDao dataDao = appDatabase.dataDao();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dataDao.insertData(dataEntity);
+                Log.d("TAG", "DATOS GENERALES GUARDADOS BIEN");
+            }
+
+        }).start();
+
     }
 
     @Override

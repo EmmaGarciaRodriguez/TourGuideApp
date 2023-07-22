@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -144,6 +146,7 @@ public class Adapter extends BaseAdapter {
         return view;
     }
 
+
     public void saveinfoDB() {
         //GUARDAR LA LISTA DE FAVORITOS EN LA BD
 
@@ -152,14 +155,27 @@ public class Adapter extends BaseAdapter {
         String jsonData = gson.toJson(listaFavs);
 
         // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
-        int entityId = 2;
+        int entityId = 1;
         DataEntity dataEntity = new DataEntity(entityId, jsonData);
 
         // Inserta la entidad en la base de datos
-        AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
+        //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
 
+
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(context.getApplicationContext());
+        DataDao dataDao = appDatabase.dataDao();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dataDao.insertData(dataEntity);
+                Log.d("TAG", "DATOS LISTAFAVS GUARDADOS BIEN");
+
+            }
+        }).start();
+        //Guardar dato
+        //dataDao.insertData(dataEntity);
     }
-
 
     @Override
     public int getCount() {

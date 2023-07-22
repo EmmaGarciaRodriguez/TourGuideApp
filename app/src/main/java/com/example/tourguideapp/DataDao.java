@@ -10,10 +10,10 @@ import java.util.List;
 @Dao
 public interface DataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertData(DataEntity data);
+    void insertData(DataEntity dataEntity);
 
     @Query("SELECT * FROM data_table WHERE id = :id")
-    DataEntity getDataById(int id);
+    DataEntity getDataById(Integer id);
 
     // Otros métodos para actualizar o eliminar datos según tus necesidades
 }
