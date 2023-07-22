@@ -42,6 +42,8 @@ public class HomeScreen extends AppCompatActivity {
         // Luego, realiza la transacción del Fragment
 
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+        navigation.getMenu().getItem(1).setChecked(true);
+        loadFragment(secondFragment);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,6 +59,7 @@ public class HomeScreen extends AppCompatActivity {
                     return true;
 
                 case R.id.thirdFragment:
+                    secondFragment.getAdapter().saveinfoDB();
                     loadFragment(thirdFragment);
                     return true;
             }

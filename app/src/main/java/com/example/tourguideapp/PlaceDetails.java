@@ -41,13 +41,15 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
         Bundle bundle = intent.getExtras();
 
         // Verificar si el Bundle no es nulo y contiene el array bidimensional
-        if (bundle != null && bundle.containsKey("DATA")) {
+        if (bundle != null && bundle.containsKey("DATA") && bundle.containsKey("ImagesData")) {
             // Obtener el array bidimensional de cadenas de texto
             String[][] data = (String[][]) bundle.getSerializable("DATA");
+            int[] ImagesData = (int[]) bundle.getSerializable("ImagesData");
 
             title.setText(data[posicion][0]);
             description.setText(data[posicion][1]);
-            //rating.setProgress(listaDatos[listPosition][0]);
+            rating.setProgress(Integer.valueOf(data[posicion][2]));
+            image.setImageResource(ImagesData[posicion]);
         }
 
     }

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 /**
@@ -32,8 +34,10 @@ public class SecondFragment extends Fragment{
     private String mParam1;
     private String mParam2;
     private Context mContext;
+    private Adapter adapter;
 
     private DataListener dataListener;
+
 
     ListView list;
     String[][] data = {
@@ -48,6 +52,10 @@ public class SecondFragment extends Fragment{
             {"Puerta de Alcalá","Madrid","10"},
             {"Real Alcázar","Sevilla","6"}
     };
+
+    // Supongamos que tienes una lista de datos que deseas guardar en la base de datos
+    //List<DataEntity> dataList = data;
+
     int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
 
     public SecondFragment() {
@@ -79,6 +87,16 @@ public class SecondFragment extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // Convierte la lista String[][] a JSON utilizando Gson
+        /*Gson gson = new Gson();
+        String jsonData = gson.toJson(data);
+
+        // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
+        int entityId = 1;
+        DataEntity dataEntity = new DataEntity(entityId, jsonData);
+
+        // Inserta la entidad en la base de datos
+        AppDatabase.getInstance(mContext).dataDao().insertData(dataEntity);*/
     }
 
     @Override
@@ -95,7 +113,8 @@ public class SecondFragment extends Fragment{
         list = (ListView) view.findViewById(R.id.IvLista);
 
         // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-        list.setAdapter(new Adapter(mContext, data, imgData, list));
+        adapter = new Adapter(mContext, data, imgData, list);
+        list.setAdapter(adapter);
 
         return view;
     }
@@ -108,6 +127,11 @@ public class SecondFragment extends Fragment{
         }
 
     }
+
+    public Adapter getAdapter() {
+        return adapter;
+    }
+
     public interface DataListener {
         void onDataReceived(String[][] dataList);
     }
