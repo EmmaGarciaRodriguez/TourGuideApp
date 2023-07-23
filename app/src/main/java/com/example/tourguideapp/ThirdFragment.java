@@ -35,12 +35,14 @@ public class ThirdFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Context mContext;
+    private AdapterFav adapterFav;
 
     private SecondFragment.DataListener dataListener;
 
     ListView list;
     List<Integer> listaFavs;
     String[][] dataList;
+
 
     public ThirdFragment() {
         // Required empty public constructor
@@ -64,6 +66,11 @@ public class ThirdFragment extends Fragment {
         return fragment;
     }
 
+
+    public interface DataLoadListener {
+        void onDataLoaded(List<Integer> listaFavs, String[][] dataList);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +78,10 @@ public class ThirdFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        recuperateData();
-
     }
 
-    private void recuperateData() {
+
+    private void recuperateData(DataLoadListener listener) {
         AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext()); // O getContext() según el método donde estés
         DataDao dataDao = appDatabase.dataDao();
 
@@ -94,7 +99,7 @@ public class ThirdFragment extends Fragment {
                 // Convierte el JSON a una lista String[][]
                 Gson gson = new Gson();
                 dataList = gson.fromJson(jsonData, String[][].class);
-                Log.d("TAG", "DATOS LEIDOS CORRECTAMENTE");
+                Log.d("TAG", "DATOS DATA LEIDOS CORRECTAMENTE");
                 // Ahora dataList contiene la lista original de String[][]
 
 
@@ -108,35 +113,12 @@ public class ThirdFragment extends Fragment {
                 Gson g = new Gson();
                 Type listType = new TypeToken<List<Integer>>(){}.getType();
                 listaFavs = g.fromJson(jsonFavsData, listType);
+                Log.d("TAG", "DATOS LISTA FAVORITOS LEIDOS CORRECTAMENTE");
 
                 // Ahora listaFavs contiene la lista original de enteros que habías guardado
-
+                listener.onDataLoaded(listaFavs, dataList);
             }
         }).start();
-
-
-
-        //Recuperar la lista con las posiciones de los elementos favoritos
-
-
-
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DataEntity favsEntity = dataDao.getDataById(entId);
-                // Recupera el JSON almacenado en la entidad
-                String jsonFavsData = favsEntity.getDataJson();
-
-                // Convierte el JSON a una lista de enteros utilizando Gson
-                Gson g = new Gson();
-                Type listType = new TypeToken<List<Integer>>(){}.getType();
-                listaFavs = g.fromJson(jsonFavsData, listType);
-
-                // Ahora listaFavs contiene la lista original de enteros que habías guardado
-
-            }
-        }).start();*/
-
 
         Log.d("TAG", "Valor de listaFavs: " + listaFavs);
         Log.d("TAG", "Valor de datos: " + dataList);
@@ -152,13 +134,31 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_third, container, false);
-
+        // Utiliza el método recuperateData() con la interfaz DataLoadListener
         // Obtiene una referencia al ListView
         list = (ListView) view.findViewById(R.id.IvListaFavs);
 
-        // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-        list.setAdapter(new AdapterFav(mContext, listaFavs, dataList, list));
-
+        recuperateData(new DataLoadListener() {
+            @Override
+            public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
+                // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
+                adapterFav = new AdapterFav(mContext, listaFavs, dataList, list);
+                list.setAdapter(adapterFav);
+            }
+        });
         return view;
     }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (dataListener != null) {
+            dataListener.onDataReceived(dataList);
+        }
+
+    }
+
+    public AdapterFav getAdapterFav() {
+        return adapterFav;
+    }
+
 }
