@@ -15,10 +15,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomeScreen extends AppCompatActivity {
 
     TextView tName;
-    FirstFragment firstFragment = new FirstFragment();
-    SecondFragment secondFragment = new SecondFragment();
-    ThirdFragment thirdFragment = new ThirdFragment();
 
+    FirstFragment firstFragment = new FirstFragment();
+    SecondFragment secondFragment = new SecondFragment(this);
+    ThirdFragment thirdFragment = new ThirdFragment(this);
+    String userid;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +38,11 @@ public class HomeScreen extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         String password = getIntent().getStringExtra("password");
         String userId = getIntent().getStringExtra("userId");
+
+        //guarda el userid del usuario
+        setUserid(getIntent().getStringExtra("userId"));
+
+
         Bundle bundle = new Bundle();
         bundle.putString("name", name); // Agrega los datos que deseas pasar al Fragment
         bundle.putString("password", password); // Agrega los datos que deseas pasar al Fragment

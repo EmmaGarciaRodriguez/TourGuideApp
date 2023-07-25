@@ -58,10 +58,12 @@ public class SecondFragment extends Fragment{
     //List<DataEntity> dataList = data;
 
     int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
+    private HomeScreen homeScreen;
 
-    public SecondFragment() {
+    public SecondFragment(HomeScreen homeScreen) {
         // Required empty public constructor
-    }
+            this.homeScreen = homeScreen;
+        }
 
     /**
      * Use this factory method to create a new instance of
@@ -72,8 +74,8 @@ public class SecondFragment extends Fragment{
      * @return A new instance of fragment SecondFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SecondFragment newInstance(String param1, String param2) {
-        SecondFragment fragment = new SecondFragment();
+    public static SecondFragment newInstance(String param1, String param2, HomeScreen homeScreen) {
+        SecondFragment fragment = new SecondFragment(homeScreen);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -131,7 +133,7 @@ public class SecondFragment extends Fragment{
         list = (ListView) view.findViewById(R.id.IvLista);
 
         // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-        adapter = new Adapter(mContext, data, imgData, list);
+        adapter = new Adapter(mContext, data, imgData, list, homeScreen);
         list.setAdapter(adapter);
 
         return view;

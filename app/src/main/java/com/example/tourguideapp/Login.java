@@ -14,6 +14,7 @@ public class Login extends AppCompatActivity {
 
     EditText userId, password;
     Button login;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class Login extends AppCompatActivity {
                                 String name = userEntity.name;
                                 String password = userEntity.password;
                                 String userId = userEntity.userId;
+                                setUserid(userId);
                                 Intent intent = new Intent(Login.this, HomeScreen.class);
                                 intent.putExtra("name", name);
                                 intent.putExtra("password", password);
@@ -61,5 +63,13 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

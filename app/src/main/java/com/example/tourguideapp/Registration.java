@@ -43,6 +43,7 @@ public class Registration extends AppCompatActivity {
                         public void run() {
                             //Register User
                             userDao.registerUser(userEntity);
+
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

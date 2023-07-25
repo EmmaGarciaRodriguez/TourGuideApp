@@ -42,10 +42,11 @@ public class ThirdFragment extends Fragment {
     ListView list;
     List<Integer> listaFavs;
     String[][] dataList;
+    private HomeScreen homeScreen;
 
-
-    public ThirdFragment() {
+    public ThirdFragment(HomeScreen homeScreen) {
         // Required empty public constructor
+        this.homeScreen = homeScreen;
     }
 
     /**
@@ -57,8 +58,8 @@ public class ThirdFragment extends Fragment {
      * @return A new instance of fragment ThirdFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ThirdFragment newInstance(String param1, String param2) {
-        ThirdFragment fragment = new ThirdFragment();
+    public static ThirdFragment newInstance(String param1, String param2, HomeScreen homeScreen) {
+        ThirdFragment fragment = new ThirdFragment(homeScreen);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,15 +79,24 @@ public class ThirdFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        recuperateData(new DataLoadListener() {
+            @Override
+            public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
+                // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
+                adapterFav = new AdapterFav(mContext, listaFavs, dataList, list);
+                list.setAdapter(adapterFav);
+            }
+        });
     }
 
 
     private void recuperateData(DataLoadListener listener) {
         AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext()); // O getContext() según el método donde estés
         DataDao dataDao = appDatabase.dataDao();
+        FavouritesDao favouritesDao = appDatabase.favouritesDao();
 
         Integer entityId = 2; // Asigna el ID de la entidad que deseas recuperar
-        int entId = 1; // El mismo ID que utilizaste al guardar la lista
+        //int entId = 1; // El mismo ID que utilizaste al guardar la lista
 
         new Thread(new Runnable() {
             @Override
@@ -105,9 +115,10 @@ public class ThirdFragment extends Fragment {
 
 
                 //RECUPERAR LISTA POSICIONES
-                DataEntity favsEntity = dataDao.getDataById(entId);
+                String userId = homeScreen.getUserid();
+                FavouritesEntity favsEntity = favouritesDao.getFavouritesByUserId(userId);
                 // Recupera el JSON almacenado en la entidad
-                String jsonFavsData = favsEntity.getDataJson();
+                String jsonFavsData = favsEntity.getFavouritePositionsJson();
 
                 // Convierte el JSON a una lista de enteros utilizando Gson
                 Gson g = new Gson();

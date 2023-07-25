@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,9 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,16 +41,21 @@ public class Adapter extends BaseAdapter {
     ListView lista;
     List<Integer> listaFavs = new ArrayList<>();
     List<Boolean> listaEstados = new ArrayList<Boolean>();
+    private SharedPreferences sharedPreferences;
+    private HomeScreen home;
 
-    public Adapter(Context context, String[][] data, int[] images, ListView list)
+
+    public Adapter(Context context, String[][] data, int[] images, ListView list, HomeScreen homescreen)
     {
         this.context = context;
         this.data = data;
         this.imgData = images;
         this.lista = list;
+        this.home = homescreen;
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
+
 
 
     @Override
@@ -82,6 +90,12 @@ public class Adapter extends BaseAdapter {
         // Inicializar la lista con 10 elementos en false
         for (int j = 0; j < 10; j++) {
             listaEstados.add(false);
+        }
+
+        for (int position : listaFavs) {
+            if (position >= 0 && position < listaEstados.size()) {
+                listaEstados.set(position, true);
+            }
         }
 
         //CLICK EL CHECKBOX
@@ -154,21 +168,26 @@ public class Adapter extends BaseAdapter {
         Gson gson = new Gson();
         String jsonData = gson.toJson(listaFavs);
 
+
+
+
         // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
-        int entityId = 1;
-        DataEntity dataEntity = new DataEntity(entityId, jsonData);
+        //int entityId = 1;
+
+        String userId = home.getUserid();
+        FavouritesEntity favouritesEntity = new FavouritesEntity(userId, jsonData);
 
         // Inserta la entidad en la base de datos
         //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
 
 
         AppDatabase appDatabase = AppDatabase.getAppDatabase(context.getApplicationContext());
-        DataDao dataDao = appDatabase.dataDao();
+        FavouritesDao favouritesDao = appDatabase.favouritesDao();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                dataDao.insertData(dataEntity);
+                favouritesDao.insertFavourites(favouritesEntity);
                 Log.d("TAG", "DATOS LISTAFAVS GUARDADOS BIEN");
 
             }
@@ -192,4 +211,7 @@ public class Adapter extends BaseAdapter {
         return 0;
     }
 
+    public SharedPreferences getSharedPreferences(String mis_preferencias, int modePrivate) {
+        return sharedPreferences;
+    }
 }
