@@ -1,6 +1,7 @@
 package com.example.tourguideapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,14 +35,16 @@ public class FirstFragment extends Fragment {
     private String name;
     private String password;
     private String userId;
+    private HomeScreen home;
 
 
     TextView tPassword;
     TextView tId;
     TextView tName;
 
-    public FirstFragment() {
+    public FirstFragment(HomeScreen home) {
         // Required empty public constructor
+        this.home = home;
     }
 
     /**
@@ -51,13 +57,13 @@ public class FirstFragment extends Fragment {
      * @return A new instance of fragment FirstFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FirstFragment newInstance(String name, String password, String id) {
+    public static FirstFragment newInstance(String name, String password, String id, HomeScreen home) {
 
         Bundle args = new Bundle();
         args.putString("name", name);
         args.putString("password", password);
         args.putString("userId", id);
-        FirstFragment fragment = new FirstFragment();
+        FirstFragment fragment = new FirstFragment(home);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,6 +77,11 @@ public class FirstFragment extends Fragment {
             userId = getArguments().getString(userId);
             password = getArguments().getString(password);
         }
+
+        userId = home.getUserid();
+        name = home.getName();
+        password = home.getPassword();
+
     }
 
     @Override
@@ -95,7 +106,21 @@ public class FirstFragment extends Fragment {
             // Realiza alguna acción con los datos recibidos
         }
 
-        // Resto del código del método onCreateView()
+
+
+        Button btn = view.findViewById(R.id.savebutton);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Código para abrir la Segunda Actividad
+                Intent intent = new Intent(getContext(), EditProfile.class);
+
+                intent.putExtra("name", name);
+                intent.putExtra("user", userId);
+                intent.putExtra("password", password);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

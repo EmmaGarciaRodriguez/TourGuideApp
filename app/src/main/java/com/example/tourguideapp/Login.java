@@ -50,7 +50,6 @@ public class Login extends AppCompatActivity {
                                 String name = userEntity.name;
                                 String password = userEntity.password;
                                 String userId = userEntity.userId;
-                                setUserid(userId);
                                 Intent intent = new Intent(Login.this, HomeScreen.class);
                                 intent.putExtra("name", name);
                                 intent.putExtra("password", password);

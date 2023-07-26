@@ -11,7 +11,7 @@ public interface FavouritesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertFavourites(FavouritesEntity favouritesEntity);
 
-    @Query("SELECT * FROM favourites WHERE user_id =( :userId) and id = 1")
+    @Query("SELECT * FROM favourites WHERE user_id =(:userId)")
     FavouritesEntity getFavouritesByUserId(String userId);
 
     // Otros métodos que puedas necesitar

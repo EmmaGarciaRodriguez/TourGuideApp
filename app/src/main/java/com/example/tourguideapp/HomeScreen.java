@@ -16,10 +16,12 @@ public class HomeScreen extends AppCompatActivity {
 
     TextView tName;
 
-    FirstFragment firstFragment = new FirstFragment();
+    FirstFragment firstFragment = new FirstFragment(this);
     SecondFragment secondFragment = new SecondFragment(this);
     ThirdFragment thirdFragment = new ThirdFragment(this);
     String userid;
+    String name;
+    String password;
 
     public String getUserid() {
         return userid;
@@ -27,6 +29,22 @@ public class HomeScreen extends AppCompatActivity {
 
     public void setUserid(String userid) {
         this.userid = userid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -41,6 +59,8 @@ public class HomeScreen extends AppCompatActivity {
 
         //guarda el userid del usuario
         setUserid(getIntent().getStringExtra("userId"));
+        setName(getIntent().getStringExtra("name"));
+        setPassword(getIntent().getStringExtra("password"));
 
 
         Bundle bundle = new Bundle();
