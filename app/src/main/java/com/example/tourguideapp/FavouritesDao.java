@@ -2,15 +2,16 @@ package com.example.tourguideapp;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 @Dao
 public interface FavouritesDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertFavourites(FavouritesEntity favouritesEntity);
 
-    @Query("SELECT * FROM favourites WHERE user_id = :userId")
+    @Query("SELECT * FROM favourites WHERE user_id =( :userId) and id = 1")
     FavouritesEntity getFavouritesByUserId(String userId);
 
     // Otros métodos que puedas necesitar

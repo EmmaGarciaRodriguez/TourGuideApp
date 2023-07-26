@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -39,17 +40,39 @@ public class AdapterFav extends BaseAdapter {
 
         final View view = inflater.inflate(R.layout.listelement, null);
 
-        // Verifica si la posición actual está contenida en la lista de posiciones
-        if (listaFavs.contains(position)) {
-            // Si la posición está en la lista de posiciones, muestra el elemento en la vista
-            TextView textView = view.findViewById(R.id.tvTitle);
 
+        TextView title = (TextView) view.findViewById(R.id.tvTitle);
+        TextView  subtitle = (TextView) view.findViewById(R.id.tvSubtitle);
+        ImageView image = (ImageView) view.findViewById(R.id.ivImage);
+        RatingBar rating = (RatingBar) view.findViewById(R.id.eRatingBar);
+        Button hola = (Button) view.findViewById(R.id.hola);
+        CheckBox box = (CheckBox) view.findViewById(R.id.favbtn);
+
+
+        // Verifica si la posición actual está contenida en la lista de posiciones
+        // Si la posición está en la lista de posiciones, muestra el elemento en la vista
+
+        if (listaFavs.contains(position)) {
+            title.setText(data[position][0]);
+            subtitle.setText(data[position][1]);
+            //image.setImageResource(imgData[position]);
+            rating.setProgress(Integer.valueOf(data[position][2]));
+            box.setVisibility(View.GONE);
+
+            //image.setTag(position); //keeps the reference of the image clicked
+
+            /*image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent visorImage = new Intent(context, Visor.class);
+                    visorImage.putExtra("IMG", imgData[(Integer)v.getTag()]);
+                    context.startActivity(visorImage);
+                }
+            });
+            /*TextView textView = view.findViewById(R.id.tvTitle);
             textView.setText(String.valueOf(data[position][0]));
-        } else {
-            // Si la posición no está en la lista de posiciones, oculta el elemento en la vista
-            // Por ejemplo, si tienes un TextView en el layout del elemento, puedes ocultarlo así:
-            TextView textView = view.findViewById(R.id.tvTitle);
-            textView.setVisibility(View.GONE);
+            TextView subtitleView = view.findViewById(R.id.tvSubtitle);
+            subtitleView.setText(String.valueOf(data[position][1]));*/
         }
 
         return view;

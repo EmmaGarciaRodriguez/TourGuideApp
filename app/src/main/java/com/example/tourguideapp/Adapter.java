@@ -45,13 +45,14 @@ public class Adapter extends BaseAdapter {
     private HomeScreen home;
 
 
-    public Adapter(Context context, String[][] data, int[] images, ListView list, HomeScreen homescreen)
+    public Adapter(Context context, String[][] data, int[] images, ListView list, HomeScreen homescreen, List<Integer> listaFavs)
     {
         this.context = context;
         this.data = data;
         this.imgData = images;
         this.lista = list;
         this.home = homescreen;
+        this.listaFavs = listaFavs;
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -121,8 +122,8 @@ public class Adapter extends BaseAdapter {
             }
                 // Actualizar el estado del CheckBox en la lista de estados
                 listaEstados.set(position, isChecked);
-                Log.d("TAG", "Valor de miVariable: " + listaFavs);
 
+                saveinfoDB();
             }
         });
 
@@ -168,14 +169,11 @@ public class Adapter extends BaseAdapter {
         Gson gson = new Gson();
         String jsonData = gson.toJson(listaFavs);
 
-
-
-
         // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
         //int entityId = 1;
 
         String userId = home.getUserid();
-        FavouritesEntity favouritesEntity = new FavouritesEntity(userId, jsonData);
+        FavouritesEntity favouritesEntity = new FavouritesEntity(1, userId, jsonData);
 
         // Inserta la entidad en la base de datos
         //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);

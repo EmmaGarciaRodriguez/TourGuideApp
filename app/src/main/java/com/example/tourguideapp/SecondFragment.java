@@ -16,7 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -36,6 +38,9 @@ public class SecondFragment extends Fragment{
     private String mParam2;
     private Context mContext;
     private Adapter adapter;
+
+    List<Integer> listFavs;
+    String[][] dataList;
 
     private DataListener dataListener;
 
@@ -132,12 +137,63 @@ public class SecondFragment extends Fragment{
         // Obtiene una referencia al ListView
         list = (ListView) view.findViewById(R.id.IvLista);
 
-        // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-        adapter = new Adapter(mContext, data, imgData, list, homeScreen);
-        list.setAdapter(adapter);
+
+        recuperateData(new ThirdFragment.DataLoadListener() {
+            @Override
+            public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
+                // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
+                adapter = new Adapter(mContext, data, imgData, list, homeScreen, listFavs);
+                list.setAdapter(adapter);
+            }
+        });
 
         return view;
     }
+
+
+    private void recuperateData(ThirdFragment.DataLoadListener listener) {
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext()); // O getContext() según el método donde estés
+        DataDao dataDao = appDatabase.dataDao();
+        FavouritesDao favouritesDao = appDatabase.favouritesDao();
+
+        Integer entityId = 2; // Asigna el ID de la entidad que deseas recuperar
+        //int entId = 1; // El mismo ID que utilizaste al guardar la lista
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Recupera el JSON almacenado en la entidad
+                DataEntity dataEntity = dataDao.getDataById(entityId);
+
+                String jsonData = dataEntity.getDataJson();
+
+                // Convierte el JSON a una lista String[][]
+                Gson gson = new Gson();
+                dataList = gson.fromJson(jsonData, String[][].class);
+                Log.d("TAG", "DATOS DATA LEIDOS CORRECTAMENTE");
+                // Ahora dataList contiene la lista original de String[][]
+
+
+
+                //RECUPERAR LISTA POSICIONES
+                String userId = homeScreen.getUserid();
+                FavouritesEntity favsEntity = favouritesDao.getFavouritesByUserId(userId);
+                // Recupera el JSON almacenado en la entidad
+                String jsonFavsData = favsEntity.getFavouritePositionsJson();
+
+                // Convierte el JSON a una lista de enteros utilizando Gson
+                Gson g = new Gson();
+                Type listType = new TypeToken<List<Integer>>(){}.getType();
+                listFavs = g.fromJson(jsonFavsData, listType);
+                Log.d("TAG", "DATOS LISTA FAVORITOS LEIDOS CORRECTAMENTE");
+
+                // Ahora listaFavs contiene la lista original de enteros que habías guardado
+                listener.onDataLoaded(listFavs, dataList);
+            }
+        }).start();
+
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

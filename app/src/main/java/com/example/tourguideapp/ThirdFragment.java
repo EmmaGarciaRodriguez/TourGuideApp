@@ -79,14 +79,6 @@ public class ThirdFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        recuperateData(new DataLoadListener() {
-            @Override
-            public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
-                // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-                adapterFav = new AdapterFav(mContext, listaFavs, dataList, list);
-                list.setAdapter(adapterFav);
-            }
-        });
     }
 
 

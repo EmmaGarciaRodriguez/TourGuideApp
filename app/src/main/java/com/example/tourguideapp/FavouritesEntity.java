@@ -16,7 +16,8 @@ public class FavouritesEntity {
     @ColumnInfo(name = "favourite_positions_json")
     private String favouritePositionsJson;
 
-    public FavouritesEntity(String userId, String favouritePositionsJson) {
+    public FavouritesEntity(int id, String userId, String favouritePositionsJson) {
+        this.id = id;
         this.userId = userId;
         this.favouritePositionsJson = favouritePositionsJson;
     }
