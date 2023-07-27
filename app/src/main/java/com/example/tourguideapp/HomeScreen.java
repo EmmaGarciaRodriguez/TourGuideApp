@@ -94,7 +94,7 @@ public class HomeScreen extends AppCompatActivity {
                     return true;
 
                 case R.id.thirdFragment:
-                    secondFragment.getAdapter().saveinfoDB();
+                    //secondFragment.getAdapter().saveinfoDB();
                     loadFragment(thirdFragment);
                     return true;
             }

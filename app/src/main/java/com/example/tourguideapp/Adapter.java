@@ -52,7 +52,7 @@ public class Adapter extends BaseAdapter {
         this.imgData = images;
         this.lista = list;
         this.home = homescreen;
-        this.listaFavs = listaFavs;
+        this.listaFavs = listaFavs != null ? listaFavs : new ArrayList<>();
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -93,9 +93,12 @@ public class Adapter extends BaseAdapter {
             listaEstados.add(false);
         }
 
-        for (int position : listaFavs) {
-            if (position >= 0 && position < listaEstados.size()) {
-                listaEstados.set(position, true);
+        // Marcar como true los elementos en listaEstados que coincidan con los índices en listaFavs
+        if (listaFavs != null && !listaFavs.isEmpty()) {
+            for (int position : listaFavs) {
+                if (position >= 0 && position < listaEstados.size()) {
+                    listaEstados.set(position, true);
+                }
             }
         }
 
@@ -103,6 +106,7 @@ public class Adapter extends BaseAdapter {
         CheckBox checkBox = view.findViewById(R.id.favbtn);
 
         // Establecer el estado del CheckBox según la lista de estados
+
         checkBox.setChecked(listaEstados.get(i));
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -158,6 +162,7 @@ public class Adapter extends BaseAdapter {
                 PlaceDetails detailsPage = new PlaceDetails();
             }
         });
+        saveinfoDB();
         return view;
     }
 
@@ -196,7 +201,7 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return imgData.length;
+        return data.length;
     }
 
     @Override
