@@ -76,6 +76,5 @@ public class Registration extends AppCompatActivity {
             return false;
         }
         return true;
-
     }
 }

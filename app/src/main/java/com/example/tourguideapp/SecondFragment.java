@@ -88,7 +88,9 @@ public class SecondFragment extends Fragment{
         fragment.setArguments(args);
         return fragment;
     }
-
+    public interface DataLoadListener {
+        void onDataLoaded(List<Integer> listaFavs, String[][] dataList);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +116,7 @@ public class SecondFragment extends Fragment{
         //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
 
 
-        AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext());
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(getContext().getApplicationContext());
         DataDao dataDao = appDatabase.dataDao();
 
         new Thread(new Runnable() {
@@ -133,6 +135,7 @@ public class SecondFragment extends Fragment{
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
@@ -141,25 +144,25 @@ public class SecondFragment extends Fragment{
         // Obtiene una referencia al ListView
         list = (ListView) view.findViewById(R.id.IvLista);
 
-        recuperateData(new DataLoadListener() {
+        recuperateData();
+        adapter = new Adapter(getContext(), data, imgData, list, homeScreen, listFavs);
+        list.setAdapter(adapter);
+        /*recuperateData(new DataLoadListener() {
             @Override
             public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
                 // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-                adapter = new Adapter(mContext, data, imgData, list, homeScreen, listFavs);
+                adapter = new Adapter(getContext(), data, imgData, list, homeScreen, listFavs);
                 list.setAdapter(adapter);
             }
-        });
+        });*/
 
         return view;
     }
 
-    public interface DataLoadListener {
-        void onDataLoaded(List<Integer> listaFavs, String[][] dataList);
-    }
 
 
-    private void recuperateData(DataLoadListener listener) {
-        AppDatabase appDatabase = AppDatabase.getAppDatabase(mContext.getApplicationContext()); // O getContext() según el método donde estés
+    private void recuperateData() {
+        AppDatabase appDatabase = AppDatabase.getAppDatabase(getContext().getApplicationContext()); // O getContext() según el método donde estés
         DataDao dataDao = appDatabase.dataDao();
         FavouritesDao favouritesDao = appDatabase.favouritesDao();
 
@@ -198,7 +201,7 @@ public class SecondFragment extends Fragment{
                     Log.d("TAG", "DATOS LISTA FAVORITOS LEIDOS CORRECTAMENTE");
 
                     // Ahora listaFavs contiene la lista original de enteros que habías guardado
-                    listener.onDataLoaded(listFavs, dataList);
+                    //listener.onDataLoaded(listFavs, dataList);
                 }
             }
         }).start();
