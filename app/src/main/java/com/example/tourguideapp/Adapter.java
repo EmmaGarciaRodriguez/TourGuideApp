@@ -39,7 +39,7 @@ public class Adapter extends BaseAdapter {
     String[][] data;
     int[] imgData;
     ListView lista;
-    List<Integer> listaFavs = new ArrayList<>();
+    List<Integer> listaFavs;
     List<Boolean> listaEstados = new ArrayList<Boolean>();
     private SharedPreferences sharedPreferences;
     private HomeScreen home;
@@ -53,6 +53,11 @@ public class Adapter extends BaseAdapter {
         this.lista = list;
         this.home = homescreen;
         this.listaFavs = listaFavs != null ? listaFavs : new ArrayList<>();
+
+        // Inicializar la lista con 10 elementos en false
+        for (int j = 0; j < 10; j++) {
+            listaEstados.add(false);
+        }
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -88,19 +93,15 @@ public class Adapter extends BaseAdapter {
         });
 
 
-        // Inicializar la lista con 10 elementos en false
-        for (int j = 0; j < 10; j++) {
-            listaEstados.add(false);
-        }
-
         // Marcar como true los elementos en listaEstados que coincidan con los índices en listaFavs
         if (listaFavs != null && !listaFavs.isEmpty()) {
             for (int position : listaFavs) {
-                if (position >= 0 && position < listaEstados.size()) {
+                if (position >= 0 && position <= listaEstados.size()) {
                     listaEstados.set(position, true);
                 }
             }
         }
+
 
         //CLICK EL CHECKBOX
         CheckBox checkBox = view.findViewById(R.id.favbtn);

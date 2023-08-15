@@ -40,7 +40,7 @@ public class SecondFragment extends Fragment{
     private Context mContext;
     private Adapter adapter;
 
-    List<Integer> listFavs = new ArrayList<>();
+    List<Integer> listFavs;
     String[][] dataList;
 
     private DataListener dataListener;
@@ -146,6 +146,7 @@ public class SecondFragment extends Fragment{
 
         recuperateData();
         adapter = new Adapter(getContext(), data, imgData, list, homeScreen, listFavs);
+        adapter.notifyDataSetChanged();
         list.setAdapter(adapter);
         /*recuperateData(new DataLoadListener() {
             @Override

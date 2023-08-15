@@ -145,7 +145,9 @@ public class ThirdFragment extends Fragment {
             @Override
             public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
                 // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
+
                 adapterFav = new AdapterFav(mContext, listaFavs, dataList, list);
+                adapterFav.notifyDataSetChanged();
                 list.setAdapter(adapterFav);
             }
         });

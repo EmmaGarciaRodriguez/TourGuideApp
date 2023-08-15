@@ -3,6 +3,7 @@ package com.example.tourguideapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -13,8 +14,10 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
 
     String[][] listaDatos;
 
+
     public PlaceDetails() {
     }
+
     @Override
     public void onDataReceived(String[][] dataList) {
         listaDatos = dataList;
@@ -22,6 +25,13 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_place_details_land);
+        } else {
+            setContentView(R.layout.activity_place_details);
+        }
+
         setContentView(R.layout.activity_place_details);
 
         TextView title = findViewById(R.id.eTitle);
