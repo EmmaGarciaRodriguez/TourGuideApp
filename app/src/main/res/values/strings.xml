@@ -2,13 +2,20 @@
     <string name="app_name">TourGuideApp</string>
     <string name="hello">Hello word!</string>
     <string name="welcome">Welcome to the tourist guide</string>
+    <string name="start">START</string>
+    <string name="RegistrationTitle">Register User</string>
+    <string name="RegUser">Enter User Id</string>
+    <string name="RegPass">Enter Password</string>
+    <string name="RegName">Enter Name</string>
+    <string name="RegButton">Register</string>
+    <string name="RegInfo">If you have already registered, click here:</string>
+    <string name="LoginButton">Login</string>
+    <string name="SelectIdiom">Select idiom</string>
+    <string name="Spanish">Spanish</string>
+    <string name="English">English</string>
+    <string name="LoginTitle">Login User</string>
+    <string name="message">User registered!</string>
 
-    <string name="title">Your profile</string>
-    <string name="nameData">NAME:</string>
-    <string name="surnameData">SURNAME:</string>
-    <string name="passwordData">PASSWORD:</string>
-    <string name="emailData">EMAIL:</string>
-    <string name="phoneData">PHONE:</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 

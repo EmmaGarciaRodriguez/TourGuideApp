@@ -2,4 +2,18 @@
     <string name="app_name">Aplicación de guía turistica</string>
     <string name="hello">Hola mundo!</string>
     <string name="welcome">Bienvenidos a la aplicación de guía turística</string>
+    <string name="start">Empezar</string>
+    <string name="RegistrationTitle">Registrar usuario</string>
+    <string name="RegUser">Introduce usuario</string>
+    <string name="RegPass">Introduce contraseña</string>
+    <string name="RegName">Introduce nombre</string>
+    <string name="RegButton">Registrar</string>
+    <string name="RegInfo">Si ya se ha registado, click aquí:</string>
+    <string name="LoginButton">Iniciar sesión</string>
+    <string name="SelectIdiom">Seleccionar idioma</string>
+    <string name="Spanish">Español</string>
+    <string name="English">Inglés</string>
+    <string name="LoginTitle">Acceso Usuario</string>
+    <string name="message">Usuario registrado!</string>
+
 </resources>

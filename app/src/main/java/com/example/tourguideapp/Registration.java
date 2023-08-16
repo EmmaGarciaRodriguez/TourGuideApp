@@ -47,7 +47,8 @@ public class Registration extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(getApplicationContext(), "User registered!", Toast.LENGTH_SHORT).show();
+                                    String infomessage = getString(R.string.message);
+                                    Toast.makeText(getApplicationContext(), infomessage, Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -55,7 +56,8 @@ public class Registration extends AppCompatActivity {
                     }).start();
 
                 }else{
-                    Toast.makeText(getApplicationContext(), "Fill all fields!!", Toast.LENGTH_SHORT).show();
+                    String infomessage = getString(R.string.message);
+                    Toast.makeText(getApplicationContext(), infomessage, Toast.LENGTH_SHORT).show();
                 }
 
             }

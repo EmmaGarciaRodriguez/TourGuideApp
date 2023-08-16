@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register User"
+        android:text="@string/RegistrationTitle"
         android:textStyle="bold"
         style="@style/TextAppearance.AppCompat.Headline"
         android:textSize="25sp"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:hint="Enter UserId"
+        android:hint="@string/RegUser"
         android:id="@+id/userId"/>
 
     <EditText
@@ -29,14 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:hint="Enter Password"
+        android:hint="@string/RegPass"
         android:id="@+id/password"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:hint="Enter Name"
+        android:hint="@string/RegName"
         android:id="@+id/name"/>
 
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
         android:backgroundTint="#A823910B"
-        android:text="Register"/>
+        android:text="@string/RegButton"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -55,7 +55,7 @@
         android:layout_marginTop="25sp"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:text="Si ya esás registrado, click aquí: " />
+        android:text="@string/RegInfo" />
 
     <Button
         android:id="@+id/login"
@@ -65,7 +65,7 @@
         android:layout_marginRight="20sp"
         android:layout_marginTop="2sp"
         android:backgroundTint="#A823910B"
-        android:text="Login" />
+        android:text="@string/LoginButton" />
 
 
 

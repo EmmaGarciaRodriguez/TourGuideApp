@@ -38,7 +38,7 @@
         android:backgroundTintMode="multiply"
         android:onClick="next"
         android:shadowColor="#FFEB3B"
-        android:text="START"
+        android:text="@string/start"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#1E2E87"
         app:layout_constraintBottom_toBottomOf="parent"

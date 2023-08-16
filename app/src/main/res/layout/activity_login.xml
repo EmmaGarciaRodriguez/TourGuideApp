@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login User"
+        android:text="@string/LoginTitle"
         android:textStyle="bold"
         style="@style/TextAppearance.AppCompat.Headline"
         android:textSize="25sp"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:hint="Enter UserId"
+        android:hint="@string/RegUser"
         android:id="@+id/userId"/>
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:hint="Enter Password"
+        android:hint="@string/RegPass"
         android:id="@+id/password"/>
 
     <Button
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
         android:backgroundTint="#A823910B"
-        android:text="Login"/>
+        android:text="@string/LoginButton"/>
 
 </LinearLayout>

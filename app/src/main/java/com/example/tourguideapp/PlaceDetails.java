@@ -14,10 +14,6 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
 
     String[][] listaDatos;
 
-
-    public PlaceDetails() {
-    }
-
     @Override
     public void onDataReceived(String[][] dataList) {
         listaDatos = dataList;
@@ -26,13 +22,11 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_place_details_land);
-        } else {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             setContentView(R.layout.activity_place_details);
+        } else {
+            setContentView(R.layout.activity_place_details_land);
         }
-
-        setContentView(R.layout.activity_place_details);
 
         TextView title = findViewById(R.id.eTitle);
         TextView description = findViewById(R.id.eDescription);
