@@ -2,7 +2,7 @@
     <string name="app_name">TourGuideApp</string>
     <string name="hello">Hello word!</string>
     <string name="welcome">Welcome to the tourist guide</string>
-    <string name="start">START</string>
+    <string name="start">Start</string>
     <string name="RegistrationTitle">Register User</string>
     <string name="RegUser">Enter User Id</string>
     <string name="RegPass">Enter Password</string>
@@ -15,6 +15,30 @@
     <string name="English">English</string>
     <string name="LoginTitle">Login User</string>
     <string name="message">User registered!</string>
+    <string name="message2">Fill all fields!</string>
+    <string name="message3">Invalid credentials!</string>
+    <string name="name">"Name: "</string>
+    <string name="surname">"Surname: "</string>
+    <string name="user">"User: "</string>
+    <string name="pass">"Password: "</string>
+    <string name="phone">"Phone: "</string>
+    <string name="mail">"Mail: "</string>
+    <string name="btn1">Edit my profile</string>
+    <string name="ansName">---</string>
+    <string name="ansSurname">---</string>
+    <string name="ansUser">---</string>
+    <string name="ansPass">---</string>
+    <string name="ansPhone">---</string>
+    <string name="ansMail">---</string>
+    <string name="logOut">Log Out</string>
+    <string name="Title1">User Profile</string>
+    <string name="Title3">Favourite Places</string>
+    <string name="Title2">Places</string>
+    <string name="navbar1">Profile</string>
+    <string name="navbar2">Places</string>
+    <string name="navbar3">Favourites</string>
+    <string name="btnMap">See Map</string>
+    <string name="btnComments">Comments</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

@@ -56,8 +56,8 @@ public class Registration extends AppCompatActivity {
                     }).start();
 
                 }else{
-                    String infomessage = getString(R.string.message);
-                    Toast.makeText(getApplicationContext(), infomessage, Toast.LENGTH_SHORT).show();
+                    String infomessage2 = getString(R.string.message2);
+                    Toast.makeText(getApplicationContext(), infomessage2, Toast.LENGTH_SHORT).show();
                 }
 
             }

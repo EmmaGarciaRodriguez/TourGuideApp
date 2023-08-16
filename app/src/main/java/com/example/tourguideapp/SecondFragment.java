@@ -47,8 +47,10 @@ public class SecondFragment extends Fragment{
 
 
     ListView list;
-    String[][] data = {
-            {"Alhambra de Granada","Granada","10"},
+    String[][] data;
+
+    /*String[][] data = {
+            {"Alhambra de Granada","La Alhambra es un complejo monumental sobre una ciudad palatina andalusí situada en Granada, España. Consiste en un conjunto de antiguos palacios, jardines y fortalezas inicialmente concebido para alojar al emir y la corte del reino Nazarí, más tarde como residencia de los reyes de Castilla y de sus representantes.","10"},
             {"Basílica de la Sagrada Familia","Barcelona","2"},
             {"Casa Batlló","Barcelona","3"},
             {"Catedral de Sevilla","Sevilla","4"},
@@ -58,7 +60,7 @@ public class SecondFragment extends Fragment{
             {"Plaza de España","Sevilla","4"},
             {"Puerta de Alcalá","Madrid","10"},
             {"Real Alcázar","Sevilla","6"}
-    };
+    };*/
 
     // Supongamos que tienes una lista de datos que deseas guardar en la base de datos
     //List<DataEntity> dataList = data;
@@ -98,6 +100,7 @@ public class SecondFragment extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        data = homeScreen.getData();
         saveData();
     }
 

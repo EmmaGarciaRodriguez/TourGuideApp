@@ -122,6 +122,17 @@ public class FirstFragment extends Fragment {
             }
         });
 
+
+        Button btnLogOut = view.findViewById(R.id.buttonLogOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Código para abrir la Segunda Actividad
+                Intent intent = new Intent(getContext(), Registration.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

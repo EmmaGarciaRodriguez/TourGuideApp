@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 public class PlaceDetails extends AppCompatActivity implements SecondFragment.DataListener {
 
     String[][] listaDatos;
+    String[][] data;
 
     @Override
     public void onDataReceived(String[][] dataList) {
@@ -29,6 +32,7 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
         }
 
         TextView title = findViewById(R.id.eTitle);
+        TextView subtitle = findViewById(R.id.esubtitle);
         TextView description = findViewById(R.id.eDescription);
         ImageView image = findViewById(R.id.eImage);
         RatingBar rating = findViewById(R.id.eRatingBar);
@@ -47,14 +51,40 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
         // Verificar si el Bundle no es nulo y contiene el array bidimensional
         if (bundle != null && bundle.containsKey("DATA") && bundle.containsKey("ImagesData")) {
             // Obtener el array bidimensional de cadenas de texto
-            String[][] data = (String[][]) bundle.getSerializable("DATA");
+            data = (String[][]) bundle.getSerializable("DATA");
             int[] ImagesData = (int[]) bundle.getSerializable("ImagesData");
 
             title.setText(data[posicion][0]);
-            description.setText(data[posicion][1]);
+            subtitle.setText(data[posicion][1]);
+            description.setText(data[posicion][3]);
+
             rating.setProgress(Integer.valueOf(data[posicion][2]));
             image.setImageResource(ImagesData[posicion]);
         }
+
+        Button btn = findViewById(R.id.button2);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción a realizar cuando se hace clic en el botón
+                Intent intent = new Intent(PlaceDetails.this, MapActivity.class);
+                intent.putExtra("latitude", data[posicion][4]);
+                intent.putExtra("longitude", data[posicion][5]);
+                startActivity(intent);
+            }
+        });
+
+        Button btn2 = findViewById(R.id.button3);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción a realizar cuando se hace clic en el botón
+                Intent intent = new Intent(PlaceDetails.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

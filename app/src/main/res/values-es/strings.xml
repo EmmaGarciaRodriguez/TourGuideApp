@@ -15,5 +15,29 @@
     <string name="English">Inglés</string>
     <string name="LoginTitle">Acceso Usuario</string>
     <string name="message">Usuario registrado!</string>
+    <string name="message2">Rellena todos los campos!</string>
+    <string name="name">Nombre: </string>
+    <string name="surname">Apellidos: </string>
+    <string name="user">Usuario: </string>
+    <string name="pass">Contraseña: </string>
+    <string name="phone">Teléfono: </string>
+    <string name="mail">Email: </string>
+    <string name="btn1">Editar mis datos</string>
+    <string name="message3">Datos erróneos</string>
+    <string name="ansName">---</string>
+    <string name="ansSurname">---</string>
+    <string name="ansUser">---</string>
+    <string name="ansPass">---</string>
+    <string name="ansPhone">---</string>
+    <string name="ansMail">---</string>
+    <string name="logOut">Cerrar sesión</string>
+    <string name="Title1">Perfil de usuario</string>
+    <string name="Title2">Lugares</string>
+    <string name="Title3">Lugares favoritos</string>
+    <string name="navbar1">Perfil</string>
+    <string name="navbar2">Lugares</string>
+    <string name="navbar3">Favoritos</string>
+    <string name="btnMap">VER MAPA</string>
+    <string name="btnComments">VER COMENTARIOS</string>
 
 </resources>

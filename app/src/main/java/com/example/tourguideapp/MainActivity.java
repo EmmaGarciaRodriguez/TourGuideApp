@@ -1,6 +1,7 @@
 package com.example.tourguideapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        selectedLang = getSelectedLang(); // Recuperar el idioma guardado
+        selectedLang = getSelectedLang(this); // Recuperar el idioma guardado
 
         if (selectedLang.equals("en")) {
             spinner.setSelection(1);
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 String newlySelectedLang = parent.getItemAtPosition(position).toString();
                 if (!newlySelectedLang.equals(selectedLang)) {
                     selectedLang = newlySelectedLang;
-                    setSelectedLang(selectedLang);
+                    setSelectedLang(selectedLang, getApplicationContext());
                     if (selectedLang == "English"){
                         setLocal(MainActivity.this, "en");
                     }else if (selectedLang == "Spanish"){
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setLocal(Activity activity, String langCode){
+    public static void setLocal(Activity activity, String langCode){
         Locale locale = new Locale(langCode);
         locale.setDefault(locale);
         Resources resources = activity.getResources();
@@ -144,18 +145,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Guardar el valor en SharedPreferences
-    public void setSelectedLang(String langCode) {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+    public static void setSelectedLang(String langCode, Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedLang", langCode);
         editor.apply();
     }
 
     // Recuperar el valor desde SharedPreferences
-    public String getSelectedLang() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+    public static String getSelectedLang(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
         return sharedPreferences.getString("selectedLang", null);
     }
+
 }
 
     //USER REGISTRATION

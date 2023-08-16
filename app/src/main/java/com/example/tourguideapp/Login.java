@@ -30,7 +30,8 @@ public class Login extends AppCompatActivity {
                 String userIdText = userId.getText().toString();
                 String passwordText = password.getText().toString();
                 if (userIdText.isEmpty() || passwordText.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Fill all Fields!", Toast.LENGTH_SHORT).show();
+                    String infomessage2 = getString(R.string.message2);
+                    Toast.makeText(getApplicationContext(), infomessage2, Toast.LENGTH_SHORT).show();
                 } else{
                     // Perform Query
                     UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
@@ -43,7 +44,9 @@ public class Login extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                                        String infomessage3 = getString(R.string.message3);
+                                        Toast.makeText(getApplicationContext(), infomessage3, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }else{
