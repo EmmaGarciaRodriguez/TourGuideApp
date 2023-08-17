@@ -1,5 +1,6 @@
 package com.example.tourguideapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class PlaceDetails extends AppCompatActivity implements SecondFragment.DataListener {
@@ -36,7 +44,7 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
         TextView description = findViewById(R.id.eDescription);
         ImageView image = findViewById(R.id.eImage);
         RatingBar rating = findViewById(R.id.eRatingBar);
-
+        Button rtrnBtn = findViewById(R.id.returnBtn);
 
 
         // Obtener el Intent que inició esta actividad
@@ -59,32 +67,16 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
             description.setText(data[posicion][3]);
 
             rating.setProgress(Integer.valueOf(data[posicion][2]));
-            image.setImageResource(ImagesData[posicion]);
+
+            new DownloadImageTask(image).execute(data[posicion][4]);
+            //image.setImageResource(ImagesData[posicion]);
         }
 
-        Button btn = findViewById(R.id.button2);
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        rtrnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acción a realizar cuando se hace clic en el botón
-                Intent intent = new Intent(PlaceDetails.this, MapActivity.class);
-                intent.putExtra("latitude", data[posicion][4]);
-                intent.putExtra("longitude", data[posicion][5]);
-                startActivity(intent);
+                onBackPressed(); // Vuelve a la actividad anterior
             }
         });
-
-        Button btn2 = findViewById(R.id.button3);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Acción a realizar cuando se hace clic en el botón
-                Intent intent = new Intent(PlaceDetails.this, MapActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }

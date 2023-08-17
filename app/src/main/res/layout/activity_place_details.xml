@@ -43,16 +43,6 @@
         app:layout_constraintTop_toBottomOf="@+id/esubtitle"
         app:layout_constraintVertical_bias="0.107" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/btnMap"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eRatingBar" />
-
     <ImageView
         android:id="@+id/eImage"
         android:layout_width="323dp"
@@ -67,23 +57,26 @@
 
     <RatingBar
         android:id="@+id/eRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="236dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eDescription" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/returnBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnComments"
+
+        android:backgroundTint="#CDDC39"
+        android:text="@string/btnReturn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.284" />
+        app:layout_constraintTop_toBottomOf="@+id/eRatingBar"
+        app:layout_constraintVertical_bias="0.326" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

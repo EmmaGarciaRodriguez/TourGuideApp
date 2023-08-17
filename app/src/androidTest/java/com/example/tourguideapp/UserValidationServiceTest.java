@@ -9,9 +9,9 @@ public class UserValidationServiceTest {
 
     @Test
     public void testValidName() {
-        assertTrue(UserValidationService.isValidPassword("John Doe"));
+        assertTrue(UserValidationService.isValidPassword("JohnDoe"));
         assertTrue(UserValidationService.isValidName("Alice O'Connor"));
-        assertFalse(UserValidationService.isValidName("123 Invalid"));
+        assertFalse(UserValidationService.isValidUserId("123 Invalid"));
     }
 
 

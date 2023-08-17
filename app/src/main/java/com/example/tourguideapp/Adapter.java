@@ -54,11 +54,6 @@ public class Adapter extends BaseAdapter {
         this.home = homescreen;
         this.listaFavs = listaFavs != null ? listaFavs : new ArrayList<>();
 
-        // Inicializar la lista con 10 elementos en false
-        for (int j = 0; j < 10; j++) {
-            listaEstados.add(false);
-        }
-
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -78,10 +73,12 @@ public class Adapter extends BaseAdapter {
 
         title.setText(data[i][0]);
         subtitle.setText(data[i][1]);
-        image.setImageResource(imgData[i]);
+
+        new DownloadImageTask(image).execute(data[i][4]);
+
         rating.setProgress(Integer.valueOf(data[i][2]));
 
-        image.setTag(i); //keeps the reference of the image clicked
+        /*image.setTag(i); //keeps the reference of the image clicked
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +87,11 @@ public class Adapter extends BaseAdapter {
                 visorImage.putExtra("IMG", imgData[(Integer)v.getTag()]);
                 context.startActivity(visorImage);
             }
-        });
-
+        });*/
+        // Inicializar la lista con 10 elementos en false
+                for (int j = 0; j < 10; j++) {
+                    listaEstados.add(false);
+                }
 
         // Marcar como true los elementos en listaEstados que coincidan con los índices en listaFavs
         if (listaFavs != null && !listaFavs.isEmpty()) {
@@ -107,8 +107,10 @@ public class Adapter extends BaseAdapter {
         CheckBox checkBox = view.findViewById(R.id.favbtn);
 
         // Establecer el estado del CheckBox según la lista de estados
+        if (listaEstados.get(i)){
+            checkBox.setChecked(true);
+        }
 
-        checkBox.setChecked(listaEstados.get(i));
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

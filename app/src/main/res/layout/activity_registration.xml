@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:backgroundTint="#A823910B"
+        android:backgroundTint="#CDDC39"
         android:text="@string/RegButton"/>
 
     <TextView
@@ -64,7 +64,7 @@
         android:layout_marginLeft="20sp"
         android:layout_marginRight="20sp"
         android:layout_marginTop="2sp"
-        android:backgroundTint="#A823910B"
+        android:backgroundTint="#CDDC39"
         android:text="@string/LoginButton" />
 
 

@@ -65,7 +65,7 @@ public class SecondFragment extends Fragment{
     // Supongamos que tienes una lista de datos que deseas guardar en la base de datos
     //List<DataEntity> dataList = data;
 
-    int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
+    int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia,R.drawable.mezquitacordoba, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
     private HomeScreen homeScreen;
 
     public SecondFragment(HomeScreen homeScreen) {

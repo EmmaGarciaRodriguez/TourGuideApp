@@ -39,5 +39,6 @@
     <string name="navbar3">Favoritos</string>
     <string name="btnMap">VER MAPA</string>
     <string name="btnComments">VER COMENTARIOS</string>
+    <string name="btnReturn">Volver</string>
 
 </resources>

@@ -61,14 +61,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 }).start();
 
-                FirstFragment firstFragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
+                /*FirstFragment firstFragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
 
                 // Start a new Fragment transaction
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.firstFragment, firstFragment);  // 'fragment_container' should be the ID of your FrameLayout or the container where you want to add the fragment
-                transaction.commit();
-
-
+                transaction.commit();*/
 
 
                 if (savedInstanceState == null) {

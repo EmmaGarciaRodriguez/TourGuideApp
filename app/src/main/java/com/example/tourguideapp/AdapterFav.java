@@ -55,7 +55,10 @@ public class AdapterFav extends BaseAdapter {
         // Si la posición está en la lista de posiciones, muestra el elemento en la vista
 
         if (listaFavs.contains(position)) {
-            image.setImageResource(imgData[position]);
+
+
+            new DownloadImageTask(image).execute(data[position][4]);
+            //image.setImageResource(imgData[position]);
             title.setText(data[position][0]);
             subtitle.setText(data[position][1]);
             //image.setImageResource(imgData[position]);

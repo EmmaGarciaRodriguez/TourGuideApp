@@ -16,6 +16,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/layout-land'
+            ]
+        }
+    }
 
     buildTypes {
         release {
@@ -67,5 +75,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:<version>'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:<version>'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
+
 
 }

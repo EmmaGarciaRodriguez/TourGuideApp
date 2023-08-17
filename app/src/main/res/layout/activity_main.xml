@@ -10,20 +10,36 @@
 
     <TextView
         android:id="@+id/textViewWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="249dp"
+        android:layout_height="123dp"
+        android:fontFamily="@font/bebas"
         android:text="@string/welcome"
-        android:textSize="40sp"
-        android:textColor="#CDDC39"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-light"
         android:textAlignment="center"
+        android:textColor="#00008B"
+        android:textColorHighlight="@color/green_dark"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.134" />
+
+    <TextView
+        android:id="@+id/textViewWelcome"
+        android:layout_width="249dp"
+        android:layout_height="123dp"
+        android:fontFamily="@font/bebas"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textColor="#00008B"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.134" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -38,29 +54,20 @@
         android:id="@+id/button"
         android:layout_width="161dp"
         android:layout_height="52dp"
-        android:backgroundTint="#CDDC39"
         android:backgroundTintMode="multiply"
+        android:fontFamily="@font/bebas"
         android:onClick="next"
-        android:shadowColor="#FFEB3B"
+        android:textSize="30dp"
+        android:padding="10dp"
+        android:layout_margin="20dp"
         android:text="@string/start"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#1E2E87"
+        android:textColor="#00008B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome"
-        app:layout_constraintVertical_bias="0.927" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="333dp"
-        android:layout_height="296dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintVertical_bias="0.823" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
