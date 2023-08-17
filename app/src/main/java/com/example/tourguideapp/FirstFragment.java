@@ -73,14 +73,10 @@ public class FirstFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            name = getArguments().getString(name);
-            userId = getArguments().getString(userId);
-            password = getArguments().getString(password);
+            name = getArguments().getString(ARG_PARAM1);
+            userId = getArguments().getString(ARG_PARAM2);
+            password = getArguments().getString(ARG_PARAM3);
         }
-
-        userId = home.getUserid();
-        name = home.getName();
-        password = home.getPassword();
 
     }
 

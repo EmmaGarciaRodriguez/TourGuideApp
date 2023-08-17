@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TourGuideApp</string>
     <string name="hello">Hello word!</string>
-    <string name="welcome">Welcome to the tourist guide</string>
+    <string name="welcome">Explore Spain with us!</string>
     <string name="start">Start</string>
     <string name="RegistrationTitle">Register User</string>
     <string name="RegUser">Enter User Id</string>

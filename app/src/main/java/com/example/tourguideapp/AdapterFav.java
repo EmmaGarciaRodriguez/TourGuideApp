@@ -2,6 +2,7 @@ package com.example.tourguideapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,26 @@ public class AdapterFav extends BaseAdapter {
             TextView subtitleView = view.findViewById(R.id.tvSubtitle);
             subtitleView.setText(String.valueOf(data[position][1]));*/
         }
+        hola.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para abrir la nueva Activity
+                Intent intent = new Intent(context, PlaceDetails.class);
+
+                intent.putExtra("POSITION", position);
+
+                // Crear un Bundle y agregar el array bidimensional como un extra en el Bundle
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DATA", data);
+                bundle.putSerializable("ImagesData", imgData);
+
+                // Agregar el Bundle como un extra en el Intent
+                intent.putExtras(bundle);
+
+                // Iniciar la nueva Activity utilizando el Intent
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }

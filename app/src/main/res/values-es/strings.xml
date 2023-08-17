@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Aplicación de guía turistica</string>
     <string name="hello">Hola mundo!</string>
-    <string name="welcome">Bienvenidos a la aplicación de guía turística</string>
+    <string name="welcome">Explora España con nosotros!</string>
     <string name="start">Empezar</string>
     <string name="RegistrationTitle">Registrar usuario</string>
     <string name="RegUser">Introduce usuario</string>

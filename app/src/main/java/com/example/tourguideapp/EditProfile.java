@@ -72,11 +72,20 @@ public class EditProfile extends AppCompatActivity {
                 u.setText(newUser);
                 p.setText(newPassword);*/
 
-                /*Intent intent = new Intent(EditProfile.this, FirstFragment.class);
+                /*Intent intent = new Intent(getApplicationContext(), FirstFragment.class);
                 intent.putExtra("name", newName);
                 intent.putExtra("password", newPassword);
                 intent.putExtra("userId", newUser);
                 startActivity(intent);*/
+
+                //FirstFragment fragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
+
+
+
+
+                Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+                startActivity(intent);
+
                 if (savedInstanceState == null) {
                     // Si no hay ningún fragmento en el contenedor, creamos una instancia de FirstFragment y lo agregamos
                     getSupportFragmentManager().beginTransaction()
