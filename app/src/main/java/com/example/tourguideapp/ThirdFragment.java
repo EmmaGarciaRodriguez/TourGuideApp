@@ -43,11 +43,15 @@ public class ThirdFragment extends Fragment {
     List<Integer> listaFavs;
     String[][] dataList;
     private HomeScreen homeScreen;
+    int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
+
 
     public ThirdFragment(HomeScreen homeScreen) {
         // Required empty public constructor
         this.homeScreen = homeScreen;
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -146,7 +150,7 @@ public class ThirdFragment extends Fragment {
             public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
                 // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
 
-                adapterFav = new AdapterFav(mContext, listaFavs, dataList, list);
+                adapterFav = new AdapterFav(mContext, listaFavs, dataList, list, imgData);
                 adapterFav.notifyDataSetChanged();
                 list.setAdapter(adapterFav);
             }

@@ -1,22 +1,17 @@
 package com.example.tourguideapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +73,15 @@ public class FirstFragment extends Fragment {
             password = getArguments().getString(ARG_PARAM3);
         }
 
+        // Obtener el Bundle y extraer la información
+        /*Bundle args = getArguments();
+        if (args != null) {
+            name = args.getString("newName");
+            userId = args.getString("newUser");
+            password = args.getString("newPass");
+
+        }*/
+
     }
 
     @Override
@@ -109,7 +113,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Código para abrir la Segunda Actividad
-                Intent intent = new Intent(getContext(), EditProfile.class);
+                Intent intent = new Intent(getContext(), EditProfileActivity.class);
 
                 intent.putExtra("name", name);
                 intent.putExtra("user", userId);

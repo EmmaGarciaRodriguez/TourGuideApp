@@ -26,12 +26,13 @@ public class AdapterFav extends BaseAdapter {
     ListView lista;
     List<Integer> listaFavs= new ArrayList<>();
 
-    public AdapterFav(Context mContext, List<Integer> listaFavs, String[][] dataList, ListView list)
+    public AdapterFav(Context mContext, List<Integer> listaFavs, String[][] dataList, ListView list, int[] imgData)
     {
         this.context = mContext;
         this.data = dataList;
         this.lista = list;
         this.listaFavs = listaFavs;
+        this.imgData = imgData;
 
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -54,6 +55,7 @@ public class AdapterFav extends BaseAdapter {
         // Si la posición está en la lista de posiciones, muestra el elemento en la vista
 
         if (listaFavs.contains(position)) {
+            image.setImageResource(imgData[position]);
             title.setText(data[position][0]);
             subtitle.setText(data[position][1]);
             //image.setImageResource(imgData[position]);

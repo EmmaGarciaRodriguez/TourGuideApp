@@ -1,18 +1,15 @@
 package com.example.tourguideapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.io.Serializable;
-
-public class EditProfile extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     UserDatabase userDatabase;
     UserEntity currentUser;
@@ -63,28 +60,16 @@ public class EditProfile extends AppCompatActivity {
                         }).start();
                     }
                 }).start();
-                /*setContentView(R.layout.fragment_first);
-                TextView n = findViewById(R.id.tName);
-                TextView u = findViewById(R.id.tId);
-                TextView p = findViewById(R.id.tPassword);
 
-                n.setText(newName);
-                u.setText(newUser);
-                p.setText(newPassword);*/
+                FirstFragment firstFragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
 
-                /*Intent intent = new Intent(getApplicationContext(), FirstFragment.class);
-                intent.putExtra("name", newName);
-                intent.putExtra("password", newPassword);
-                intent.putExtra("userId", newUser);
-                startActivity(intent);*/
-
-                //FirstFragment fragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
+                // Start a new Fragment transaction
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.firstFragment, firstFragment);  // 'fragment_container' should be the ID of your FrameLayout or the container where you want to add the fragment
+                transaction.commit();
 
 
 
-
-                Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
-                startActivity(intent);
 
                 if (savedInstanceState == null) {
                     // Si no hay ningún fragmento en el contenedor, creamos una instancia de FirstFragment y lo agregamos

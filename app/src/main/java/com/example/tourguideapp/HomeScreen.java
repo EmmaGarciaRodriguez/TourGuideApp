@@ -91,7 +91,6 @@ public class HomeScreen extends AppCompatActivity {
                     return true;
 
                 case R.id.secondFragment:
-
                     loadFragment(secondFragment);
                     return true;
 
