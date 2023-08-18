@@ -2,7 +2,6 @@ package com.example.tourguideapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.stream.Stream;
-
-public class Registration extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
     EditText userId, password, name;
     Button register;
@@ -82,7 +79,7 @@ public class Registration extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Registration.this, Login.class));
+                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
             }
         });
     }

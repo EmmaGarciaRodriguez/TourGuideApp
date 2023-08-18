@@ -1,7 +1,6 @@
 package com.example.tourguideapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -49,26 +47,11 @@ public class SecondFragment extends Fragment{
     ListView list;
     String[][] data;
 
-    /*String[][] data = {
-            {"Alhambra de Granada","La Alhambra es un complejo monumental sobre una ciudad palatina andalusí situada en Granada, España. Consiste en un conjunto de antiguos palacios, jardines y fortalezas inicialmente concebido para alojar al emir y la corte del reino Nazarí, más tarde como residencia de los reyes de Castilla y de sus representantes.","10"},
-            {"Basílica de la Sagrada Familia","Barcelona","2"},
-            {"Casa Batlló","Barcelona","3"},
-            {"Catedral de Sevilla","Sevilla","4"},
-            {"Mercado Central","Valencia","7"},
-            {"Mezquita de Córdoba","Córdoba","8"},
-            {"Palacio Real","Madrid","9"},
-            {"Plaza de España","Sevilla","4"},
-            {"Puerta de Alcalá","Madrid","10"},
-            {"Real Alcázar","Sevilla","6"}
-    };*/
-
-    // Supongamos que tienes una lista de datos que deseas guardar en la base de datos
-    //List<DataEntity> dataList = data;
 
     int[] imgData = {R.drawable.alahambragranada, R.drawable.basilicasagradafamiliabarcelona, R.drawable.casabatllobarcelona, R.drawable.catedralsevilla, R.drawable.mercadocentralvalencia,R.drawable.mezquitacordoba, R.drawable.palaciorealmadrid, R.drawable.plazaespanasevilla, R.drawable.puertaalcalamadrid, R.drawable.realalcazarsevilla};
-    private HomeScreen homeScreen;
+    private HomeScreenActivity homeScreen;
 
-    public SecondFragment(HomeScreen homeScreen) {
+    public SecondFragment(HomeScreenActivity homeScreen) {
         // Required empty public constructor
             this.homeScreen = homeScreen;
         }
@@ -82,7 +65,7 @@ public class SecondFragment extends Fragment{
      * @return A new instance of fragment SecondFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SecondFragment newInstance(String param1, String param2, HomeScreen homeScreen) {
+    public static SecondFragment newInstance(String param1, String param2, HomeScreenActivity homeScreen) {
         SecondFragment fragment = new SecondFragment(homeScreen);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -105,18 +88,14 @@ public class SecondFragment extends Fragment{
     }
 
     public void saveData(){
-        //GUARDAR LA LISTA DE DATA EN LA BD
 
-        // Convierte la lista de DATOS a JSON utilizando Gson
+        //Save data in the DB
+
         Gson gson = new Gson();
         String jsonData = gson.toJson(data);
 
-        // Crea una instancia de la entidad y asigna el JSON a su campo correspondiente
         int entityId = 2;
         DataEntity dataEntity = new DataEntity(entityId, jsonData);
-
-        // Inserta la entidad en la base de datos
-        //AppDatabase.getInstance(context).dataDao().insertData(dataEntity);
 
 
         AppDatabase appDatabase = AppDatabase.getAppDatabase(getContext().getApplicationContext());
@@ -151,14 +130,6 @@ public class SecondFragment extends Fragment{
         adapter = new Adapter(getContext(), data, imgData, list, homeScreen, listFavs);
         adapter.notifyDataSetChanged();
         list.setAdapter(adapter);
-        /*recuperateData(new DataLoadListener() {
-            @Override
-            public void onDataLoaded(List<Integer> listaFavs, String[][] dataList) {
-                // Aquí puedes configurar el adaptador y otros ajustes para tu ListView
-                adapter = new Adapter(getContext(), data, imgData, list, homeScreen, listFavs);
-                list.setAdapter(adapter);
-            }
-        });*/
 
         return view;
     }
@@ -170,42 +141,34 @@ public class SecondFragment extends Fragment{
         DataDao dataDao = appDatabase.dataDao();
         FavouritesDao favouritesDao = appDatabase.favouritesDao();
 
-        Integer entityId = 2; // Asigna el ID de la entidad que deseas recuperar
-        //int entId = 1; // El mismo ID que utilizaste al guardar la lista
+        Integer entityId = 2;
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // Recupera el JSON almacenado en la entidad
                 DataEntity dataEntity = dataDao.getDataById(entityId);
 
                 String jsonData = dataEntity.getDataJson();
 
-                // Convierte el JSON a una lista String[][]
+
                 Gson gson = new Gson();
                 dataList = gson.fromJson(jsonData, String[][].class);
-                Log.d("TAG", "DATOS DATA LEIDOS CORRECTAMENTE");
-                // Ahora dataList contiene la lista original de String[][]
 
-                //RECUPERAR LISTA POSICIONES
+
+                //Recuperate listFavs
                 String userId = homeScreen.getUserid();
                 FavouritesEntity favsEntity = favouritesDao.getFavouritesByUserId(userId);
-                // Recupera el JSON almacenado en la entidad
+
                 if (favsEntity==null) {
                     listFavs = new ArrayList<>();
                 }
                 else {
                     String jsonFavsData = favsEntity.getFavouritePositionsJson();
 
-                    // Convierte el JSON a una lista de enteros utilizando Gson
                     Gson g = new Gson();
                     Type listType = new TypeToken<List<Integer>>() {
                     }.getType();
                     listFavs = g.fromJson(jsonFavsData, listType);
-                    Log.d("TAG", "DATOS LISTA FAVORITOS LEIDOS CORRECTAMENTE");
-
-                    // Ahora listaFavs contiene la lista original de enteros que habías guardado
-                    //listener.onDataLoaded(listFavs, dataList);
                 }
             }
         }).start();

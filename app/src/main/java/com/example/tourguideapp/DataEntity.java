@@ -11,7 +11,7 @@ public class DataEntity {
     Integer id;
 
     @ColumnInfo(name = "data_json")
-    String dataJson; // Almacenará la lista String[][] convertida a JSON
+    String dataJson;
 
 
     public DataEntity(Integer id, String dataJson) {

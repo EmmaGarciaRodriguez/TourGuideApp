@@ -1,7 +1,6 @@
 package com.example.tourguideapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     UserDatabase userDatabase;
     UserEntity currentUser;
-    HomeScreen home;
+    HomeScreenActivity home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +60,25 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 }).start();
 
-                /*FirstFragment firstFragment = FirstFragment.newInstance(newName, newPassword, newUser, home);
-
-                // Start a new Fragment transaction
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.firstFragment, firstFragment);  // 'fragment_container' should be the ID of your FrameLayout or the container where you want to add the fragment
-                transaction.commit();*/
-
 
                 if (savedInstanceState == null) {
                     // Si no hay ningún fragmento en el contenedor, creamos una instancia de FirstFragment y lo agregamos
                     getSupportFragmentManager().beginTransaction()
                             .add(R.id.frame_container, new FirstFragment(home))
                             .commit();
+
                 }
 
             }
 
+
+        });
+        Button btnrtn = findViewById(R.id.rtnButton);
+        btnrtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); //Return method
+            }
         });
     }
 }

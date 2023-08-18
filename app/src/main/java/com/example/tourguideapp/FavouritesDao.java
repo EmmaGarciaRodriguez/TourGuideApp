@@ -14,5 +14,4 @@ public interface FavouritesDao {
     @Query("SELECT * FROM favourites WHERE user_id =(:userId)")
     FavouritesEntity getFavouritesByUserId(String userId);
 
-    // Otros métodos que puedas necesitar
 }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity {
 
     TextView tName;
     String[][] data;
@@ -75,8 +75,6 @@ public class HomeScreen extends AppCompatActivity {
 
 
 
-        // Luego, realiza la transacción del Fragment
-
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
         navigation.getMenu().getItem(1).setChecked(true);
         loadFragment(secondFragment);
@@ -111,7 +109,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public String[][] getData(){
-        //MainActivity instancia = new MainActivity(); // Reemplaza con el nombre de la clase real
+
         String selectedLang = MainActivity.getSelectedLang(this);
         if (selectedLang.equals("Spanish")){
             data = new String[][]{
@@ -143,6 +141,4 @@ public class HomeScreen extends AppCompatActivity {
             }
         return data;
         };
-
-
 }

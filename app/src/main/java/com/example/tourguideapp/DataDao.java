@@ -15,6 +15,5 @@ public interface DataDao {
     @Query("SELECT * FROM data_table WHERE id = :id")
     DataEntity getDataById(Integer id);
 
-    // Otros métodos para actualizar o eliminar datos según tus necesidades
 }
 

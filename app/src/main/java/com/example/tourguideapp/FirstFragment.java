@@ -30,14 +30,14 @@ public class FirstFragment extends Fragment {
     private String name;
     private String password;
     private String userId;
-    private HomeScreen home;
+    private HomeScreenActivity home;
 
 
     TextView tPassword;
     TextView tId;
     TextView tName;
 
-    public FirstFragment(HomeScreen home) {
+    public FirstFragment(HomeScreenActivity home) {
         // Required empty public constructor
         this.home = home;
     }
@@ -52,7 +52,7 @@ public class FirstFragment extends Fragment {
      * @return A new instance of fragment FirstFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FirstFragment newInstance(String name, String password, String id, HomeScreen home) {
+    public static FirstFragment newInstance(String name, String password, String id, HomeScreenActivity home) {
 
         Bundle args = new Bundle();
         args.putString("name", name);
@@ -73,14 +73,6 @@ public class FirstFragment extends Fragment {
             password = getArguments().getString(ARG_PARAM3);
         }
 
-        // Obtener el Bundle y extraer la información
-        /*Bundle args = getArguments();
-        if (args != null) {
-            name = args.getString("newName");
-            userId = args.getString("newUser");
-            password = args.getString("newPass");
-
-        }*/
 
     }
 
@@ -103,7 +95,6 @@ public class FirstFragment extends Fragment {
             String value2 = args.getString("password"); // Obtiene el valor del Bundle
             tPassword.setText(value2);
 
-            // Realiza alguna acción con los datos recibidos
         }
 
 
@@ -112,7 +103,6 @@ public class FirstFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Código para abrir la Segunda Actividad
                 Intent intent = new Intent(getContext(), EditProfileActivity.class);
 
                 intent.putExtra("name", name);
@@ -127,8 +117,7 @@ public class FirstFragment extends Fragment {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Código para abrir la Segunda Actividad
-                Intent intent = new Intent(getContext(), Registration.class);
+                Intent intent = new Intent(getContext(), RegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,7 +130,5 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //((TextView)view.findViewById(R.id.nameAns)).setText(name);
-        //((TextView)view.findViewById(R.id.passwordAns)).setText(password);
     }
 }

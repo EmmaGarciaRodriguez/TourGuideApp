@@ -22,7 +22,7 @@ public class FavouritesEntity {
         this.favouritePositionsJson = favouritePositionsJson;
     }
 
-    // Getters and setters (opcionalmente)
+    // Getters and setters
 
     public int getId() {
         return id;

@@ -101,12 +101,11 @@
 
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/rtnButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="VOLVER"
-            android:onClick="onBackPressed"
             android:backgroundTint="#CDDC39"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

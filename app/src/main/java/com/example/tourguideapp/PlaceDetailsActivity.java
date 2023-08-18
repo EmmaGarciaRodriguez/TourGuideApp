@@ -1,6 +1,5 @@
 package com.example.tourguideapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,15 +11,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-
-public class PlaceDetails extends AppCompatActivity implements SecondFragment.DataListener {
+public class PlaceDetailsActivity extends AppCompatActivity implements SecondFragment.DataListener {
 
     String[][] listaDatos;
     String[][] data;
@@ -47,20 +39,16 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
         Button rtrnBtn = findViewById(R.id.returnBtn);
 
 
-        // Obtener el Intent que inició esta actividad
         Intent intent = getIntent();
 
-        // Obtener el valor de la posición que se pasó como extra en el Intent
         int posicion = intent.getIntExtra("POSITION", -1);
 
-        // Obtener el Bundle como extra utilizando getExtras()
         Bundle bundle = intent.getExtras();
 
-        // Verificar si el Bundle no es nulo y contiene el array bidimensional
         if (bundle != null && bundle.containsKey("DATA") && bundle.containsKey("ImagesData")) {
-            // Obtener el array bidimensional de cadenas de texto
+
             data = (String[][]) bundle.getSerializable("DATA");
-            int[] ImagesData = (int[]) bundle.getSerializable("ImagesData");
+            //int[] ImagesData = (int[]) bundle.getSerializable("ImagesData");
 
             title.setText(data[posicion][0]);
             subtitle.setText(data[posicion][1]);
@@ -68,14 +56,14 @@ public class PlaceDetails extends AppCompatActivity implements SecondFragment.Da
 
             rating.setProgress(Integer.valueOf(data[posicion][2]));
 
-            new DownloadImageTask(image).execute(data[posicion][4]);
+            new DownloadImageTaskActivity(image).execute(data[posicion][4]);
             //image.setImageResource(ImagesData[posicion]);
         }
 
         rtrnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed(); // Vuelve a la actividad anterior
+                onBackPressed(); // Come back to the last activity
             }
         });
     }
